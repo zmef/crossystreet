@@ -1,95 +1,94 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emoji Street Crossing Game</title>
     <style>
-      body {
-          font-family: Arial, sans-serif;
-          text-align: center;
-          background-color: #f4f4f4;
-      }
-      .game-container {
-          margin-top: 50px;
-          padding: 20px;
-          background: white;
-          display: inline-block;
-          border-radius: 10px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      .emoji {
-          font-size: 50px;
-      }
-      .button {
-          font-size: 20px;
-          padding: 10px;
-          margin: 10px;
-          cursor: pointer;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .game-container {
+            margin-top: 50px;
+            padding: 20px;
+            background: white;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .emoji {
+            font-size: 50px;
+        }
+        .button {
+            font-size: 20px;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="game-container">
-      <h1>🚦 Street Crossing Game 🚶</h1>
-      <p>Decide if it's safe to cross the street!</p>
-      <div id="situation" class="emoji">🚦 🚗 🚶‍♂️</div>
-      <button class="button" onclick="decideToCross()">Cross Street</button>
-      <button class="button" onclick="wait()">Wait</button>
-      <button class="button" onclick="newScenario()">New Scenario</button>
-      <p id="result"></p>
+        <h1>🚦 Street Crossing Game 🚶</h1>
+        <p>Decide if it's safe to cross the street!</p>
+        <div id="situation" class="emoji">🚦 🚗 🚶‍♂️</div>
+        <button class="button" onclick="decideToCross()">Cross Street</button>
+        <button class="button" onclick="wait()">Wait</button>
+        <button class="button" onclick="newScenario()">New Scenario</button>
+        <p id="result"></p>
     </div>
 
     <script>
-      let situation = {};
+        let situation = {};
 
-      function generateScenario() {
-          situation = {
-              destinationOnOtherSide: Math.random() > 0.5,
-              alreadyThere: Math.random() > 0.5,
-              lightIsGreen: Math.random() > 0.5,
-              noCarsApproaching: Math.random() > 0.5,
-              notDistracted: Math.random() > 0.5,
-              noObstacles: Math.random() > 0.5,
-              noBicycles: Math.random() > 0.5,
-              noTurningVehicles: Math.random() > 0.5,
-              timeRemainingOnSignal: Math.floor(Math.random() * 10),
-              crossingTime: Math.floor(Math.random() * 10),
-              canMoveQuickly: Math.random() > 0.5
-          };
-      }
+        function generateScenario() {
+            situation = {
+                destinationOnOtherSide: true, // Always needs to cross
+                alreadyThere: false, // Never already there
+                lightIsGreen: Math.random() > 0.3, // More likely to be green
+                noCarsApproaching: Math.random() > 0.3, // More likely to have no cars
+                notDistracted: Math.random() > 0.7, // More likely to be focused
+                noObstacles: Math.random() > 0.7, // Less likely to have obstacles
+                noBicycles: Math.random() > 0.7, // Less likely to have bicycles
+                noTurningVehicles: Math.random() > 0.7, // Less likely to have turning vehicles
+                timeRemainingOnSignal: Math.floor(Math.random() * 10) + 5, // More time available
+                crossingTime: Math.floor(Math.random() * 5) + 2, // Less time required
+                canMoveQuickly: true // Always able to move quickly
+            };
+        }
 
-      function evaluateCrossing() {
-          let needToCross = situation.destinationOnOtherSide && !situation.alreadyThere;
-          let safeToCross = (situation.lightIsGreen || situation.noCarsApproaching) && situation.notDistracted;
-          let pathClear = situation.noObstacles && situation.noBicycles && situation.noTurningVehicles;
-          let enoughTime = (situation.timeRemainingOnSignal > situation.crossingTime) || (situation.noCarsApproaching && situation.canMoveQuickly);
-          return needToCross && safeToCross && pathClear && enoughTime;
-      }
+        function evaluateCrossing() {
+            let needToCross = situation.destinationOnOtherSide && !situation.alreadyThere;
+            let safeToCross = (situation.lightIsGreen || situation.noCarsApproaching) && situation.notDistracted;
+            let pathClear = situation.noObstacles && situation.noBicycles && situation.noTurningVehicles;
+            let enoughTime = (situation.timeRemainingOnSignal > situation.crossingTime) || (situation.noCarsApproaching && situation.canMoveQuickly);
+            return needToCross && safeToCross && pathClear && enoughTime;
+        }
 
-      function decideToCross() {
-          let canCross = evaluateCrossing();
-          document.getElementById("result").innerText = canCross ? "✅ You crossed safely!" : "❌ It was not safe to cross! Try again!";
-      }
+        function decideToCross() {
+            let canCross = evaluateCrossing();
+            document.getElementById("result").innerText = canCross ? "✅ You crossed safely!" : "❌ It was not safe to cross! Try again!";
+        }
 
-      function wait() {
-          document.getElementById("result").innerText = "⏳ You decided to wait. Observing traffic...";
-          setTimeout(() => {
-              newScenario();
-              document.getElementById("result").innerText = "New conditions! Try again!";
-          }, 2000);
-      }
+        function wait() {
+            document.getElementById("result").innerText = "⏳ You decided to wait. Observing traffic...";
+            setTimeout(() => {
+                newScenario();
+                document.getElementById("result").innerText = "New conditions! Try again!";
+            }, 2000);
+        }
 
-      function newScenario() {
-          generateScenario();
-          document.getElementById("situation").innerText = situation.lightIsGreen ? "🟢 🚦" : "🔴 🚦";
-          document.getElementById("situation").innerText += situation.noCarsApproaching ? " ✅ 🚗" : " ❌ 🚗";
-          document.getElementById("situation").innerText += situation.notDistracted ? " 👀" : " 📱";
-          document.getElementById("result").innerText = "";
-      }
+        function newScenario() {
+            generateScenario();
+            document.getElementById("situation").innerText = situation.lightIsGreen ? "🟢 🚦" : "🔴 🚦";
+            document.getElementById("situation").innerText += situation.noCarsApproaching ? " ✅ 🚗" : " ❌ 🚗";
+            document.getElementById("situation").innerText += situation.notDistracted ? " 👀" : " 📱";
+            document.getElementById("result").innerText = "";
+        }
 
-      newScenario(); // Generate the first scenario when the page loads
+        newScenario(); // Generate the first scenario when the page loads
     </script>
-  </body>
+</body>
 </html>
