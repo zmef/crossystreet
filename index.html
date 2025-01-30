@@ -47,12 +47,9 @@
             situation = {
                 destinationOnOtherSide: true, // Always needs to cross
                 alreadyThere: false, // Never already there
-                lightIsGreen: Math.random() > 0.4, // 60% chance of green light
-                noCarsApproaching: Math.random() > 0.4, // 60% chance of no cars
-                notDistracted: Math.random() > 0.7, // 70% chance of being focused
-                noObstacles: Math.random() > 0.7, // 70% chance of no obstacles
-                noBicycles: Math.random() > 0.7, // 70% chance of no bicycles
-                noTurningVehicles: Math.random() > 0.7, // 70% chance of no turning vehicles
+                lightIsGreen: Math.random() > 0.5, // 50% chance of green light
+                noCarsApproaching: Math.random() > 0.5, // 50% chance of no cars
+                notDistracted: Math.random() > 0.8, // 80% chance of being focused
                 timeRemainingOnSignal: Math.floor(Math.random() * 10) + 5, // More time available
                 crossingTime: Math.floor(Math.random() * 2) + 2, // Less time required
                 canMoveQuickly: true // Always able to move quickly
@@ -62,9 +59,8 @@
         function evaluateCrossing() {
             let needToCross = situation.destinationOnOtherSide && !situation.alreadyThere;
             let safeToCross = (situation.lightIsGreen || situation.noCarsApproaching) && situation.notDistracted;
-            let pathClear = situation.noObstacles && situation.noBicycles && situation.noTurningVehicles;
             let enoughTime = (situation.timeRemainingOnSignal > situation.crossingTime) || (situation.noCarsApproaching && situation.canMoveQuickly);
-            return needToCross && safeToCross && pathClear && enoughTime;
+            return needToCross && safeToCross && enoughTime;
         }
 
         function decideToCross() {
