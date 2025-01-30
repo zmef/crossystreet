@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emoji Street Crossing Game</title>
+    <title>Crossy Street</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,14 +47,14 @@
             situation = {
                 destinationOnOtherSide: true, // Always needs to cross
                 alreadyThere: false, // Never already there
-                lightIsGreen: Math.random() > 0.2, // Higher chance of green light
-                noCarsApproaching: Math.random() > 0.5, // More likely to have no cars
-                notDistracted: Math.random() > 0.8, // More likely to be focused
-                noObstacles: Math.random() > 0.8, // Less likely to have obstacles
-                noBicycles: Math.random() > 0.8, // Less likely to have bicycles
-                noTurningVehicles: Math.random() > 0.8, // Less likely to have turning vehicles
+                lightIsGreen: Math.random() > 0.5, // Higher chance of green light
+                noCarsApproaching: Math.random() > 0.7, // Much more likely to have no cars
+                notDistracted: Math.random() > 0.9, // Almost always focused
+                noObstacles: Math.random() > 0.9, // Very unlikely to have obstacles
+                noBicycles: Math.random() > 0.9, // Very unlikely to have bicycles
+                noTurningVehicles: Math.random() > 0.9, // Very unlikely to have turning vehicles
                 timeRemainingOnSignal: Math.floor(Math.random() * 10) + 5, // More time available
-                crossingTime: Math.floor(Math.random() * 3) + 2, // Less time required
+                crossingTime: Math.floor(Math.random() * 2) + 2, // Less time required
                 canMoveQuickly: true // Always able to move quickly
             };
         }
