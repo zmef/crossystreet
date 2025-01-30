@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,14 +48,14 @@
             situation = {
                 destinationOnOtherSide: true, // Always needs to cross
                 alreadyThere: false, // Never already there
-                lightIsGreen: Math.random() > 0.3, // More likely to be green
-                noCarsApproaching: Math.random() > 0.3, // More likely to have no cars
-                notDistracted: Math.random() > 0.7, // More likely to be focused
-                noObstacles: Math.random() > 0.7, // Less likely to have obstacles
-                noBicycles: Math.random() > 0.7, // Less likely to have bicycles
-                noTurningVehicles: Math.random() > 0.7, // Less likely to have turning vehicles
+                lightIsGreen: Math.random() > 0.2, // Higher chance of green light
+                noCarsApproaching: Math.random() > 0.5, // More likely to have no cars
+                notDistracted: Math.random() > 0.8, // More likely to be focused
+                noObstacles: Math.random() > 0.8, // Less likely to have obstacles
+                noBicycles: Math.random() > 0.8, // Less likely to have bicycles
+                noTurningVehicles: Math.random() > 0.8, // Less likely to have turning vehicles
                 timeRemainingOnSignal: Math.floor(Math.random() * 10) + 5, // More time available
-                crossingTime: Math.floor(Math.random() * 5) + 2, // Less time required
+                crossingTime: Math.floor(Math.random() * 3) + 2, // Less time required
                 canMoveQuickly: true // Always able to move quickly
             };
         }
