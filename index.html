@@ -58,8 +58,8 @@
 
         function evaluateCrossing() {
             let needToCross = situation.destinationOnOtherSide && !situation.alreadyThere;
-            let safeToCross = (situation.lightIsGreen || situation.noCarsApproaching) && situation.notDistracted;
-            let enoughTime = (situation.timeRemainingOnSignal > situation.crossingTime) || (situation.noCarsApproaching && situation.canMoveQuickly);
+            let safeToCross = situation.lightIsGreen || situation.noCarsApproaching;
+            let enoughTime = situation.timeRemainingOnSignal >= situation.crossingTime;
             return needToCross && safeToCross && enoughTime;
         }
 
